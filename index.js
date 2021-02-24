@@ -62,7 +62,6 @@ function getWinners(array, getFinalsCB) {
     return getFinalsCB(array).map(item => item['Home Team Goals'] > item['Away Team Goals'] ? item['Home Team Name'] : item['Away Team Name']);
 }
 
-console.log(getWinners(fifaData, getFinals))
 
 /* 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 Task 5: 🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀 
 Use the higher-order function getWinnersByYear to do the following:
@@ -77,9 +76,10 @@ hint: the strings returned need to exactly match the string in step 4.
 function getWinnersByYear(array, getYearsCB, getWinnersCB) {
     let years = getYearsCB(array, getFinals); /*task 3 returns all years of finals */
     let country = getWinnersCB(array, getFinals); /*task 4 returns winners of all finals */
-    let name = years.map(function(year, index) {
-return `In ${years[index]}, ${country} won the world cup!`
+    let name = years.map((year, index) => {
+        return `In ${year}, ${country[index]} won the world cup!`
     })
+    return name;
 }
 
 
@@ -93,12 +93,11 @@ Use the higher order function getAverageGoals to do the following:
  
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
-
-function getAverageGoals(/* code here */) {
-   /* code here */
+/*getFinals is an array that returns all teams that made the finals in fifaData */
+function getAverageGoals(getFinalsCB) {
+    const totalGoals = getFinalsCB.reduce((accumulator, index) => accumulator + index['Home Team Goals'] + index['Away Team Goals'],0);
+    return (totalGoals / getFinalsCB.length).toFixed(2);
 }
-
-
 
 
 /// 🥅 STRETCH 🥅 ///
